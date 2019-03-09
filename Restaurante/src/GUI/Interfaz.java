@@ -14,10 +14,14 @@ import restaurante.Restaurante;
         
 import java.util.Date;
 import java.text.SimpleDateFormat; 
+import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 
 public class Interfaz extends javax.swing.JFrame {
     public static HashMap<String,Mesero>   listadoMeseros       = new HashMap<>();
+    public static ArrayList<Cliente>  listadoCliente       = new ArrayList<>();
+    private DefaultTableModel modelo;
     Date fecha = new Date();
     
     String usuario;
@@ -30,6 +34,7 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         deshabilitar();
         fecha();
+        
 
         
     }
@@ -68,7 +73,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnEliminarFactura = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblOrdenes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Almuerzos De A Tres");
@@ -278,7 +283,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(btnEliminarFactura)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -286,7 +291,7 @@ public class Interfaz extends javax.swing.JFrame {
                 "Cliente #", "Mesa #", "Entrada", "Plato Fuerte", "Bebida"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblOrdenes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -330,8 +335,8 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-            
-            
+      cargarCliente();            
+           
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cbosopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbosopaActionPerformed
@@ -344,9 +349,17 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
         // TODO add your handling code here:
-        //habilitar();
+        
        // this.dispose();
-        VentanaCliente.main(new String [1]);
+
+       VentanaCliente ventanaCliente = new VentanaCliente();
+       ventanaCliente.setVisible(true);
+        System.out.println(ventanaCliente.habilitado);
+       habilitar();
+       
+       
+
+      //  VentanaCliente.main(new String [1]);
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -491,6 +504,23 @@ public class Interfaz extends javax.swing.JFrame {
         listadoMeseros.put(mesero4.getContrasena(),mesero4);
         listadoMeseros.put(mesero5.getContrasena(),mesero5);
     }
+    
+        private void cargarCliente() {
+                modelo = new DefaultTableModel();
+                String[] registro = new String[5];
+                String[] titulos = {"Cliente", "Mesa", "Entrada", "Plato Fuerte", "Bebida"};
+                modelo = new DefaultTableModel(null, titulos);
+                for (Cliente clientes: this.listadoCliente) {
+                    registro[0] = clientes.getNombre();
+                    registro[1] = this.cbomesa.getSelectedItem().toString();
+                    registro[2] = this.cbosopa.getSelectedItem().toString();
+                    registro[3] = this.cboplato.getSelectedItem().toString();
+                    registro[4] = this.cbobebida.getSelectedItem().toString();
+                    modelo.addRow(registro);
+                }
+                tblOrdenes.setModel(modelo);
+
+    }
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -516,9 +546,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbFecha;
+    private javax.swing.JTable tblOrdenes;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+
 }

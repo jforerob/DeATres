@@ -5,18 +5,33 @@
  */
 package GUI;
 import  GUI.Interfaz;
+import java.util.HashMap;
+import data.*;
+import java.awt.GraphicsConfiguration;
 
 /**
  *
  * @author jjfb3
  */
 public class VentanaCliente extends javax.swing.JFrame {
-
+    String nombre ="";
+    String cedula="";
+    String telefono="1";
+    boolean habilitado=false;
+   
     /**
      * Creates new form VentanaCliente
      */
+    
+    
+
+
     public VentanaCliente() {
         initComponents();
+        this.txtNombre.setText(nombre);
+        this.txtCedula.setText(cedula);
+        this.txtTelefono.setText(telefono);
+        
     }
 
     /**
@@ -151,6 +166,16 @@ public class VentanaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+        nombre=this.txtNombre.getText();
+        cedula=this.txtCedula.getText();
+        telefono=this.txtTelefono.getText();
+        
+        Cliente cliente = new Cliente(nombre,cedula,Double.valueOf(telefono));
+        
+        Interfaz.listadoCliente.add(cliente);
+        habilitado=true;
+        
+              
         this.dispose();
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
@@ -159,7 +184,7 @@ public class VentanaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         this.dispose();
     }//GEN-LAST:event_btnCancelarClienteActionPerformed
 
