@@ -7,6 +7,7 @@ package restaurante;
 import data.Cliente;
 import data.Mesero;
 import java.util.HashMap;
+import GUI.Interfaz;
         
 /**
  *
@@ -16,6 +17,6 @@ public class Restaurante {
 
        public static void main(String[] args) {
         // TODO code application logic here
-      
+        
     }
 }

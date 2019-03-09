@@ -10,7 +10,25 @@ package data;
  * @author jjfb3
  */
 public class Cliente extends Persona{
+    
+    Cuenta cuentaCliente;
 
+    public Cliente(Cuenta cuentaCliente, String nombre, String cedula, double telefono) {
+        super(nombre, cedula, telefono);
+        this.cuentaCliente = cuentaCliente;
+    }
+    
+    
+
+    public Cuenta getCuentaCliente() {
+        return cuentaCliente;
+    }
+
+    public void setCuentaCliente(Cuenta cuentaCliente) {
+        this.cuentaCliente = cuentaCliente;
+    }
+
+    
     
     public void darPedido(){
     

@@ -354,7 +354,6 @@ public class Interfaz extends javax.swing.JFrame {
 
        VentanaCliente ventanaCliente = new VentanaCliente();
        ventanaCliente.setVisible(true);
-        System.out.println(ventanaCliente.habilitado);
        habilitar();
        
        
@@ -519,6 +518,7 @@ public class Interfaz extends javax.swing.JFrame {
                     modelo.addRow(registro);
                 }
                 tblOrdenes.setModel(modelo);
+                
 
     }
         

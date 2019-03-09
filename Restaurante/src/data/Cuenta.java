@@ -22,6 +22,7 @@ public class Cuenta {
    private String entrada;
    private String plato;
    private String bebida;
+   
 
     public Cuenta(Date fecha, double monto, double impuesto, Cliente cliente, String metodoPago, String mesa, String entrada, String plato, String bebida) {
         this.fecha = fecha;
