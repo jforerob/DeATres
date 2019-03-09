@@ -368,7 +368,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         
         login();
-
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnEliminarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarOrdenActionPerformed
@@ -420,7 +420,7 @@ public class Interfaz extends javax.swing.JFrame {
         int k = listadoMeseros.size();
         for (Mesero meseros : listadoMeseros.values()){
             if (txtUsuario.getText().equals(meseros.getUsuario()) && txtContrasena.getText().equals(meseros.getContrasena())){
-                habilitar();
+                this.btnNuevoCliente.setEnabled(true);
             }
             else {
                 i=i+1;
@@ -467,7 +467,7 @@ public class Interfaz extends javax.swing.JFrame {
         this.btnEliminarFactura.setEnabled(true);
         this.btnEliminarOrden.setEnabled(true);
         this.btnFactura.setEnabled(true);           
-        this.btnNuevoCliente.setEnabled(true);           
+                   
     
     }
     
