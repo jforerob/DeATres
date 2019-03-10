@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Interfaz extends javax.swing.JFrame {
     public static HashMap<String,Mesero>   listadoMeseros       = new HashMap<>();
     public static ArrayList<Cliente>  listadoCliente       = new ArrayList<>();
+    public static ArrayList<Cuenta>  listadoCuentas       = new ArrayList<>();
     private DefaultTableModel modelo;
     Date fecha = new Date();
     
@@ -421,6 +422,10 @@ public class Interfaz extends javax.swing.JFrame {
                 
             }
         });
+        
+        
+                
+        
     }
     
     
@@ -505,6 +510,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
         private void cargarCliente() {
+                
                 modelo = new DefaultTableModel();
                 String[] registro = new String[5];
                 String[] titulos = {"Cliente", "Mesa", "Entrada", "Plato Fuerte", "Bebida"};

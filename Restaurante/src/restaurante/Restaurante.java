@@ -17,6 +17,8 @@ public class Restaurante {
 
        public static void main(String[] args) {
         // TODO code application logic here
+        Mesero mesesor1 = Interfaz.listadoMeseros.get(1234);
         
+           System.out.println();
     }
 }
