@@ -9,6 +9,7 @@ import data.Cliente;
 import data.Cuenta;
 import data.Cliente;
 import data.Mesero;
+import java.awt.Image;
 import restaurante.Restaurante;
         
         
@@ -16,9 +17,15 @@ import java.util.Date;
 import java.text.SimpleDateFormat; 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class Interfaz extends javax.swing.JFrame {
+
     public static HashMap<String,Mesero>   listadoMeseros       = new HashMap<>();
     public static ArrayList<Cliente>  listadoCliente       = new ArrayList<>();
     public static ArrayList<Cuenta>  listadoCuentas       = new ArrayList<>();
@@ -35,8 +42,18 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         deshabilitar();
         fecha();
+        setResizable(false);
+        setLocationRelativeTo(null);
         
-
+        jPanel1.setOpaque(false);
+        jPanel2.setOpaque(false);
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/sources/img/ImagenFondo.png"));
+        uno = new ImageIcon(uno.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
         
     }
 
@@ -70,7 +87,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lbFecha = new javax.swing.JLabel();
-        btnEliminarOrden = new javax.swing.JButton();
         btnEliminarFactura = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,9 +94,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Almuerzos De A Tres");
+        setBackground(new java.awt.Color(102, 153, 255));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Restaurante"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Restaurante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bodoni MT", 0, 14))); // NOI18N
 
+        btnNuevoCliente.setBackground(new java.awt.Color(255, 204, 0));
+        btnNuevoCliente.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/nuevo-usuario.png"))); // NOI18N
         btnNuevoCliente.setText("Nuevo Cliente");
         btnNuevoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -93,6 +113,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnGuardar.setBackground(new java.awt.Color(255, 204, 0));
+        btnGuardar.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/guardar (1).png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +123,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 204, 0));
+        btnCancelar.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/prohibido.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,10 +133,23 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnFactura.setBackground(new java.awt.Color(255, 204, 0));
+        btnFactura.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/impresora.png"))); // NOI18N
         btnFactura.setText("Imprimir Factura");
+        btnFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaActionPerformed(evt);
+            }
+        });
 
+        cbomesa.setBackground(new java.awt.Color(255, 204, 0));
+        cbomesa.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         cbomesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4" }));
+        cbomesa.setBorder(null);
 
+        cbosopa.setBackground(new java.awt.Color(255, 204, 0));
+        cbosopa.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         cbosopa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sopa de Arroz", "Sopa de Colicero", "Fruta", "Sopa de Pasta" }));
         cbosopa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,10 +157,18 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        cboplato.setBackground(new java.awt.Color(255, 204, 0));
+        cboplato.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         cboplato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mojarra", "Bistec a Caballo", "Pechuga Gratinada", "Sushi" }));
 
+        cbobebida.setBackground(new java.awt.Color(255, 204, 0));
+        cbobebida.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         cbobebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mora", "Fresa", "Mango", "Corozo" }));
 
+        jPanel3.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel1.setText("Usuario:");
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -130,8 +177,11 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel2.setText("Contrsaeña");
 
+        btnEntrar.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/ingresar-boton-de-flecha-en-esquema-de-cuadrado.png"))); // NOI18N
         btnEntrar.setText("Entrar");
         btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,25 +224,29 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel3.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
 
+        jLabel4.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel4.setText("Mesa");
 
+        jLabel5.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel5.setText("Entradas");
 
+        jLabel6.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel6.setText("Platos Fuertes");
 
+        jLabel7.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         jLabel7.setText("Bebidas");
 
+        lbFecha.setBackground(new java.awt.Color(255, 204, 0));
+        lbFecha.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        lbFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/calendario.png"))); // NOI18N
         lbFecha.setText("jLabel8");
 
-        btnEliminarOrden.setText("Eliminar Orden");
-        btnEliminarOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarOrdenActionPerformed(evt);
-            }
-        });
-
+        btnEliminarFactura.setBackground(new java.awt.Color(255, 204, 0));
+        btnEliminarFactura.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        btnEliminarFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/img/boton-eliminar.png"))); // NOI18N
         btnEliminarFactura.setText("Eliminar Factura");
         btnEliminarFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,8 +291,6 @@ public class Interfaz extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEliminarOrden)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEliminarFactura)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnFactura)))
@@ -262,7 +314,7 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(lbFecha))
                         .addGap(34, 34, 34))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
@@ -274,16 +326,18 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(cbosopa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbomesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbobebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(93, 93, 93)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoCliente)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
                     .addComponent(btnFactura)
-                    .addComponent(btnEliminarOrden)
                     .addComponent(btnEliminarFactura)))
         );
 
+        tblOrdenes.setAutoCreateRowSorter(true);
+        tblOrdenes.setBackground(new java.awt.Color(255, 204, 0));
+        tblOrdenes.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -292,6 +346,7 @@ public class Interfaz extends javax.swing.JFrame {
                 "Cliente #", "Mesa #", "Entrada", "Plato Fuerte", "Bebida"
             }
         ));
+        tblOrdenes.setGridColor(new java.awt.Color(255, 204, 0));
         jScrollPane1.setViewportView(tblOrdenes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -327,7 +382,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -337,7 +392,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       cargarCliente();            
-           
+      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cbosopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbosopaActionPerformed
@@ -351,7 +406,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
         // TODO add your handling code here:
         
-       // this.dispose();
+       //this.dispose();
 
        VentanaCliente ventanaCliente = new VentanaCliente();
        ventanaCliente.setVisible(true);
@@ -359,7 +414,7 @@ public class Interfaz extends javax.swing.JFrame {
        
        
 
-      //  VentanaCliente.main(new String [1]);
+      //VentanaCliente.main(new String [1]);
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -367,11 +422,11 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnEliminarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFacturaActionPerformed
-        // TODO add your handling code here:
+        eliminarFactura();
     }//GEN-LAST:event_btnEliminarFacturaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+            deshabilitar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
@@ -384,9 +439,9 @@ public class Interfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void btnEliminarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarOrdenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarOrdenActionPerformed
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+        generarFactura();
+    }//GEN-LAST:event_btnFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -438,6 +493,7 @@ public class Interfaz extends javax.swing.JFrame {
         for (Mesero meseros : listadoMeseros.values()){
             if (txtUsuario.getText().equals(meseros.getUsuario()) && txtContrasena.getText().equals(meseros.getContrasena())){
                 this.btnNuevoCliente.setEnabled(true);
+                JOptionPane.showMessageDialog(rootPane, "Acceso permitido");
             }
             else {
                 i=i+1;
@@ -446,7 +502,11 @@ public class Interfaz extends javax.swing.JFrame {
 
        if (k==i){
             deshabilitar();
+            JOptionPane.showMessageDialog(rootPane, "Digite usuario y contraseña válidos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+       
     }
     private String fecha(){
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YYYY");
@@ -466,7 +526,6 @@ public class Interfaz extends javax.swing.JFrame {
         this.btnGuardar.setEnabled(false);
         this.btnFactura.setEnabled(false);
         this.btnEliminarFactura.setEnabled(false);
-        this.btnEliminarOrden.setEnabled(false);
         this.btnFactura.setEnabled(false);           
         this.btnNuevoCliente.setEnabled(false);           
     }
@@ -482,7 +541,6 @@ public class Interfaz extends javax.swing.JFrame {
         this.btnGuardar.setEnabled(true);
         this.btnFactura.setEnabled(true);   
         this.btnEliminarFactura.setEnabled(true);
-        this.btnEliminarOrden.setEnabled(true);
         this.btnFactura.setEnabled(true);           
                    
     
@@ -527,12 +585,24 @@ public class Interfaz extends javax.swing.JFrame {
                 
 
     }
-        
+      private void eliminarFactura(){
+    DefaultTableModel dtm = (DefaultTableModel) tblOrdenes.getModel(); 
+    dtm.removeRow(tblOrdenes.getSelectedRow()); 
+      }
+      private void generarFactura(){
+          System.out.println("imprime");
+          System.out.println("Cliente: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 0));
+          System.out.println(tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 1));
+          System.out.println("Entrada: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 2));
+          System.out.println("Plato Fuerte: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 3));
+          System.out.println("Bebida: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 4));
+ 
+      
+      }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarFactura;
-    private javax.swing.JButton btnEliminarOrden;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnFactura;
     private javax.swing.JButton btnGuardar;
