@@ -205,12 +205,16 @@ public class VentanaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+    
         nombre=this.txtNombre.getText();
         cedula=this.txtCedula.getText();
         telefono=this.txtTelefono.getText();
+        Interfaz.nombreVentanaCliente=nombre;
+        Interfaz.cedulaVentanaCliente=cedula;
+        Interfaz.telefonoVentanaCliente=telefono;
         
-        Cliente cliente = new Cliente(nombre,cedula,Double.valueOf(telefono));
-        if (nombre.length() > 0 && (Double.valueOf(telefono)> 0) ) {
+   
+        if (nombre.length() > 0 && (telefono.length())> 0 ) {
 
             JOptionPane.showMessageDialog(rootPane, "Cliente creado con éxito");
 
@@ -220,7 +224,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
         
-        Interfaz.listadoCliente.add(cliente);
+    
               
               
         this.dispose();

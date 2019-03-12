@@ -13,7 +13,7 @@ public class Cliente extends Persona{
     
     Cuenta cuentaCliente;
 
-    public Cliente(Cuenta cuentaCliente, String nombre, String cedula, double telefono) {
+    public Cliente(Cuenta cuentaCliente, String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
         this.cuentaCliente = cuentaCliente;
     }
@@ -41,7 +41,7 @@ public class Cliente extends Persona{
     public void pagar (){
     
     }
-    public Cliente(String nombre, String cedula, double telefono) {
+    public Cliente(String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
     }
 

@@ -12,9 +12,9 @@ package data;
 public abstract class Persona {
     private String nombre;
     private String cedula;
-    private double telefono;
+    private String telefono;
 
-    public Persona(String nombre, String cedula, double telefono) {
+    public Persona(String nombre, String cedula, String telefono) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
@@ -43,11 +43,11 @@ public abstract class Persona {
         this.cedula = cedula;
     }
 
-    public double getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(double telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     

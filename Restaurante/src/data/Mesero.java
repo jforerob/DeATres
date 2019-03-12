@@ -28,7 +28,7 @@ public class Mesero extends Persona {
     
     }
 
-    public Mesero(String usuario, String contrasena, String nombre, String cedula, double telefono) {
+    public Mesero(String usuario, String contrasena, String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
         this.usuario = usuario;
         this.contrasena = contrasena;

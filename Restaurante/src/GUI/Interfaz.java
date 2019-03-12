@@ -32,6 +32,18 @@ public class Interfaz extends javax.swing.JFrame {
     public static ArrayList<Cuenta>  listadoCuentas       = new ArrayList<>();
     private DefaultTableModel modelo;
     Date fecha = new Date();
+    public static String nombreVentanaCliente = ""; 
+    public static String cedulaVentanaCliente = "";
+    public static String telefonoVentanaCliente = "";
+    double montoEntrada=0;
+    double montoPlatoFuerte=0;
+    double montoBebida=0;
+    double monto=0;
+    double impuesto=0;
+    double total = 0;
+    
+       
+       
     
     String usuario;
 
@@ -161,6 +173,11 @@ public class Interfaz extends javax.swing.JFrame {
         cboplato.setBackground(new java.awt.Color(255, 204, 0));
         cboplato.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
         cboplato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mojarra", "Bistec a Caballo", "Pechuga Gratinada", "Sushi" }));
+        cboplato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboplatoActionPerformed(evt);
+            }
+        });
 
         cbobebida.setBackground(new java.awt.Color(255, 204, 0));
         cbobebida.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
@@ -411,8 +428,9 @@ public class Interfaz extends javax.swing.JFrame {
 
        VentanaCliente ventanaCliente = new VentanaCliente();
        ventanaCliente.setVisible(true);
-       ventanaCliente.txt
-               
+       nombreVentanaCliente = ventanaCliente.nombre; 
+       cedulaVentanaCliente = ventanaCliente.cedula;  
+       telefonoVentanaCliente = ventanaCliente.telefono;
        habilitar();
        
        
@@ -445,6 +463,10 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         generarFactura();
     }//GEN-LAST:event_btnFacturaActionPerformed
+
+    private void cboplatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboplatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboplatoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -556,11 +578,11 @@ public class Interfaz extends javax.swing.JFrame {
         
         listadoMeseros = new HashMap();
         
-        Mesero mesero1 = new Mesero("cam","1234","Camilo","23423", 31422);// usuario, contraseña
-        Mesero mesero2 = new Mesero("ale","1409","Alejandra","23423", 31422);// usuario, contraseña
-        Mesero mesero3 = new Mesero("San","1347","Sandra","23423", 31422);// usuario, contraseña
-        Mesero mesero4 = new Mesero("Alv","1417","Alvaro","23423", 31422);// usuario, contraseña
-        Mesero mesero5 = new Mesero("Jun","2417","Juan","23423", 31422);// usuario, contraseña
+        Mesero mesero1 = new Mesero("cam","1234","Camilo","23423", "31422");// usuario, contraseña
+        Mesero mesero2 = new Mesero("ale","1409","Alejandra","23423", "31422");// usuario, contraseña
+        Mesero mesero3 = new Mesero("San","1347","Sandra","23423", "31422");// usuario, contraseña
+        Mesero mesero4 = new Mesero("Alv","1417","Alvaro","23423", "31422");// usuario, contraseña
+        Mesero mesero5 = new Mesero("Jun","2417","Juan","23423", "31422");// usuario, contraseña
        
         
         listadoMeseros.put(mesero1.getContrasena(),mesero1);
@@ -575,13 +597,79 @@ public class Interfaz extends javax.swing.JFrame {
                 modelo = new DefaultTableModel();
                 String[] registro = new String[5];
                 String[] titulos = {"Cliente", "Mesa", "Entrada", "Plato Fuerte", "Bebida"};
+              
+                switch(this.cbosopa.getSelectedItem().toString()){
+                    case "Sopa de Arroz":
+                        montoEntrada= 1000;
+                        break;
+                    case "Sopa de Colicero":
+                        montoEntrada = 2000;
+                        break;
+                    case "Fruta":
+                        montoEntrada = 3000;
+                        break;
+                    case "Sopa de Pasta":
+                        montoEntrada = 4000;
+                        break;
+                    default:
+                        break;
+                    
+                }
+                switch(this.cboplato.getSelectedItem().toString()){
+                    case "Mojarra":
+                        montoPlatoFuerte= 1000;
+                        break;
+                    case "Bistec a Caballo":
+                        montoPlatoFuerte = 2000;
+                        break;
+                    case "Pechuga Gratinada":
+                        montoPlatoFuerte = 3000;
+                        break;
+                    case "Sushi":
+                        montoPlatoFuerte = 4000;
+                        break;
+                    default:
+                        break;
+        
+                }
+                switch(this.cbobebida.getSelectedItem().toString()){
+                    case "Mora":
+                        montoBebida= 1000;
+                        break;
+                    case "Fresa":
+                        montoBebida = 2000;
+                        break;
+                    case "Mango":
+                        montoBebida = 3000;
+                        break;
+                    case "Corozo":
+                        montoBebida = 4000;
+                        break;
+                    default:
+                        break;
+                }
+                       monto = montoPlatoFuerte+montoBebida+montoEntrada;
+                       impuesto = monto*0.07;
+                       total = monto + impuesto;
+                      
+                               Cuenta cuenta0 =  new Cuenta(fecha, 
+                        this.cbomesa.getSelectedItem().toString(),
+                        this.cbosopa.getSelectedItem().toString(),
+                        this.cboplato.getSelectedItem().toString(),
+                        this.cbobebida.getSelectedItem().toString(),
+                        monto,
+                        impuesto,
+                        total);
+                
+                Cliente cliente0 = new Cliente(cuenta0, nombreVentanaCliente, cedulaVentanaCliente, telefonoVentanaCliente);               
+                  listadoCliente.add(cliente0);
                 modelo = new DefaultTableModel(null, titulos);
-                for (Cliente clientes: this.listadoCliente) {
+                for (Cliente clientes : listadoCliente){
                     registro[0] = clientes.getNombre();
-                    registro[1] = this.cbomesa.getSelectedItem().toString();
-                    registro[2] = this.cbosopa.getSelectedItem().toString();
-                    registro[3] = this.cboplato.getSelectedItem().toString();
-                    registro[4] = this.cbobebida.getSelectedItem().toString();
+                    registro[1] = clientes.getCuentaCliente().getMesa();
+                    registro[2] = clientes.getCuentaCliente().getEntrada();
+                    registro[3] = clientes.getCuentaCliente().getPlato();
+                    registro[4] = clientes.getCuentaCliente().getBebida();
                     modelo.addRow(registro);
                 }
                 tblOrdenes.setModel(modelo);
@@ -590,10 +678,26 @@ public class Interfaz extends javax.swing.JFrame {
     }
       private void eliminarFactura(){
     DefaultTableModel dtm = (DefaultTableModel) tblOrdenes.getModel(); 
-    dtm.removeRow(tblOrdenes.getSelectedRow()); 
+      String nombre0=(String) tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 0);
+      String mesa0=(String) tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 1);
+      String entrada0=(String) tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 2);
+      String plato0=(String) tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 3);
+      String bebida0=(String) tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 4);
+      for (Cliente clientes : listadoCliente){
+                    if(nombre0 == clientes.getNombre()
+                            && mesa0 == clientes.getCuentaCliente().getMesa()
+                            && entrada0 == clientes.getCuentaCliente().getEntrada()
+                            && plato0 == clientes.getCuentaCliente().getPlato()
+                            && bebida0 == clientes.getCuentaCliente().getBebida()){
+                        listadoCliente.remove(clientes);
+                        
+                 }
+                    
+                }
+      
+      dtm.removeRow(tblOrdenes.getSelectedRow()); 
       }
       private void generarFactura(){
-          System.out.println("imprime");
           System.out.println("Cliente: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 0));
           System.out.println(tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 1));
           System.out.println("Entrada: "+tblOrdenes.getValueAt(tblOrdenes.getSelectedRow(), 2));
