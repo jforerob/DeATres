@@ -10,6 +10,7 @@ import data.Cuenta;
 import data.Cliente;
 import data.Mesero;
 import java.awt.Image;
+import GUI.VentanaCliente;
 import restaurante.Restaurante;
         
         
@@ -410,6 +411,8 @@ public class Interfaz extends javax.swing.JFrame {
 
        VentanaCliente ventanaCliente = new VentanaCliente();
        ventanaCliente.setVisible(true);
+       ventanaCliente.txt
+               
        habilitar();
        
        

@@ -91,6 +91,12 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
+
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
@@ -215,8 +221,7 @@ public class VentanaCliente extends javax.swing.JFrame {
         }
         
         Interfaz.listadoCliente.add(cliente);
-        habilitado=true;
-        
+              
               
         this.dispose();
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
@@ -233,6 +238,10 @@ public class VentanaCliente extends javax.swing.JFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
     /**
      * @param args the command line arguments
